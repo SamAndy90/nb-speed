@@ -1,0 +1,65 @@
+import React, { useId } from 'react';
+
+const GradientInstagramIcon = ({ className }: { className?: string }) => {
+    const outerId = useId();
+    const innerId = useId();
+    const dotId = useId();
+
+    return (
+        <svg
+            viewBox="0 0 40 39"
+            className={className}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M29.3377 0L9.85758 0C4.47584 0 0.0976563 4.57266 0.0976563 10.1935L0.0976563 28.8065C0.0976563 34.4273 4.47584 39 9.85758 39L29.3377 39C34.7195 39 39.0977 34.4273 39.0977 28.8065L39.0977 10.1935C39.0977 4.57266 34.7195 0 29.3377 0ZM3.54065 10.1935C3.54065 6.55606 6.37489 3.5959 9.85758 3.5959L29.3377 3.5959C32.8204 3.5959 35.6547 6.55606 35.6547 10.1935L35.6547 28.8065C35.6547 32.4439 32.8204 35.4041 29.3377 35.4041L9.85758 35.4041C6.37489 35.4041 3.54065 32.4439 3.54065 28.8065L3.54065 10.1935Z"
+                fill={`url(#${outerId})`}
+            />
+            <path
+                d="M19.5979 28.9794C24.6025 28.9794 28.6763 24.7269 28.6763 19.4977C28.6763 14.2685 24.6047 10.0161 19.5979 10.0161C14.5911 10.0161 10.5195 14.2685 10.5195 19.4977C10.5195 24.7269 14.5911 28.9794 19.5979 28.9794ZM19.5979 13.6143C22.7057 13.6143 25.2333 16.2543 25.2333 19.5C25.2333 22.7458 22.7057 25.3858 19.5979 25.3858C16.4902 25.3858 13.9625 22.7458 13.9625 19.5C13.9625 16.2543 16.4902 13.6143 19.5979 13.6143Z"
+                fill={`url(#${innerId})`}
+            />
+            <path
+                d="M29.5164 11.5479C30.864 11.5479 31.9624 10.403 31.9624 8.9932C31.9624 7.58339 30.8662 6.43848 29.5164 6.43848C28.1665 6.43848 27.0703 7.58339 27.0703 8.9932C27.0703 10.403 28.1665 11.5479 29.5164 11.5479Z"
+                fill={`url(#${dotId})`}
+            />
+            <defs>
+                <linearGradient
+                    id={outerId}
+                    x1="9.84766"
+                    y1="0"
+                    x2="35.8477"
+                    y2="39"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#B9846F" />
+                    <stop offset="0.276451" stopColor="#EFD0B6" />
+                    <stop offset="1" stopColor="#B08271" />
+                </linearGradient>
+                <linearGradient
+                    id={innerId}
+                    x1="15.0587"
+                    y1="10.0161"
+                    x2="27.9035"
+                    y2="28.4639"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#B9846F" />
+                    <stop offset="0.276451" stopColor="#EFD0B6" />
+                    <stop offset="1" stopColor="#B08271" />
+                </linearGradient>
+                <linearGradient
+                    id={dotId}
+                    x1="28.2933"
+                    y1="6.43848"
+                    x2="31.7542"
+                    y2="11.409"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#B9846F" />
+                    <stop offset="0.276451" stopColor="#EFD0B6" />
+                    <stop offset="1" stopColor="#B08271" />
+                </linearGradient>
+            </defs>
+        </svg>
+    );
+};
+
+export default GradientInstagramIcon;

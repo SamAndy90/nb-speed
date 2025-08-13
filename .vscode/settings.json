@@ -1,0 +1,7 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.experimental.updateImportsOnPaste": true,
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "typescript.surveys.enabled": false
+}

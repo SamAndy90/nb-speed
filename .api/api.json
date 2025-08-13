@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "influenceio",
+      "source": "@influenceio/v1.0#1ngg11m34ngrw3",
+      "integrity": "sha512-8jFiAfNH3IRGxz/grEpqZOTGzQZ4Bv1KclQsUbGUipKrsaCDUPHUtnNKNMNGOPHrZe0x60MxvyYUWHNe0QFzVA==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}

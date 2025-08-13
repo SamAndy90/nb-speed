@@ -1,0 +1,3187 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Influence.io Launcher API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://launcher.api.influence.io/launcher"
+    }
+  ],
+  "paths": {
+    "/v1/customer": {
+      "get": {
+        "summary": "Retrieve a customer",
+        "description": "Returns information about the customer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "digest",
+            "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+            "schema": {
+              "type": "string",
+              "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique Influence.io UUID for a customer"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "firstName": {
+                      "type": "string"
+                    },
+                    "lastName": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "customerType": {
+                      "type": "string"
+                    },
+                    "referralLink": {
+                      "type": "string"
+                    },
+                    "referralsCompleted": {
+                      "type": "integer"
+                    },
+                    "shopifyCustomerId": {
+                      "type": "string"
+                    },
+                    "pointBalance": {
+                      "type": "integer"
+                    },
+                    "shareFacebook": {
+                      "type": "boolean"
+                    },
+                    "shareTwitter": {
+                      "type": "boolean"
+                    },
+                    "likeFacebook": {
+                      "type": "boolean"
+                    },
+                    "followTwitter": {
+                      "type": "boolean"
+                    },
+                    "followTikTok": {
+                      "type": "boolean"
+                    },
+                    "followInstagram": {
+                      "type": "boolean"
+                    },
+                    "birthdayMonth": {
+                      "type": "number"
+                    },
+                    "birthdayDay": {
+                      "type": "number"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "currentLoyaltyTierProgress": {
+                      "type": "number",
+                      "description": "Tracks their current progress through the loyalty tier platform as an absolute value. If your program follows a setup of 0 points = Bronze, 200 points = Silver, 500 points = Gold, a customer with a `currentLoyaltyTierProgress` of 201 would be in silver tier."
+                    },
+                    "currentLoyaltyTierId": {
+                      "type": "string"
+                    },
+                    "lifetimeStampsEarned": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/all-rewards": {
+      "get": {
+        "summary": "Get all active rewards",
+        "description": "Returns information about the customer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Optional filter for reward types. Available values: PointActivity, CustomerLoyaltyTierEntryReward, ReferralReward",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PointActivity",
+                "CustomerLoyaltyTierEntryReward",
+                "ReferralReward"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "reward_type",
+            "description": "Optional filter for specific reward types. Available values: Free shipping, Fixed amount discount, Percentage discount, Point donation, Product discount, Gift card, Subscription Free Shipping, Subscription Fixed amount discount, Subscription Percentage discount, POS amount discount, POS percentage discount, POS product discount.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "freeshipping",
+                "amountdiscount",
+                "fixedamountdiscount",
+                "percentageoff",
+                "pointdonation",
+                "productdiscount",
+                "giftcard",
+                "subscriptionfreeshipping",
+                "subscriptionfixedamountdiscount",
+                "subscriptionpercentageoff",
+                "pos_amountdiscount",
+                "pos_percentageoff",
+                "pos_productdiscount"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "digest",
+            "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+            "schema": {
+              "type": "string",
+              "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "customerId": {
+                          "type": "string"
+                        },
+                        "couponCode": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "pointsSpent": {
+                          "type": "integer"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "rewardType": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "nextToken": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/all-rewards/count": {
+      "summary": "Get a count of all active rewards.",
+      "get": {
+        "description": "Returns a count of all rewards for a customer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Optional filter for reward types. Available values: PointActivity, CustomerLoyaltyTierEntryReward, ReferralReward",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PointActivity",
+                "CustomerLoyaltyTierEntryReward",
+                "ReferralReward"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "reward_type",
+            "description": "Optional filter for specific reward types. Available values: Free shipping, Fixed amount discount, Percentage discount, Point donation, Product discount, Gift card, Subscription Free Shipping, Subscription Fixed amount discount, Subscription Percentage discount, POS amount discount, POS percentage discount, POS product discount.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "freeshipping",
+                "amountdiscount",
+                "fixedamountdiscount",
+                "percentageoff",
+                "pointdonation",
+                "productdiscount",
+                "giftcard",
+                "subscriptionfreeshipping",
+                "subscriptionfixedamountdiscount",
+                "subscriptionpercentageoff",
+                "pos_amountdiscount",
+                "pos_percentageoff",
+                "pos_productdiscount"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "digest",
+            "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+            "schema": {
+              "type": "string",
+              "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/auth": {
+      "post": {
+        "summary": "Authenticate customer digest",
+        "deprecated": true,
+        "description": "DEPRECATED: Use `GET /v1/customer` instead.\n Returns information about the customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique Influence.io UUID for a customer"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "firstName": {
+                      "type": "string"
+                    },
+                    "lastName": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "customerType": {
+                      "type": "string"
+                    },
+                    "referralLink": {
+                      "type": "string"
+                    },
+                    "referralsCompleted": {
+                      "type": "integer"
+                    },
+                    "shopifyCustomerId": {
+                      "type": "string"
+                    },
+                    "pointBalance": {
+                      "type": "integer"
+                    },
+                    "shareFacebook": {
+                      "type": "boolean"
+                    },
+                    "shareTwitter": {
+                      "type": "boolean"
+                    },
+                    "likeFacebook": {
+                      "type": "boolean"
+                    },
+                    "followTwitter": {
+                      "type": "boolean"
+                    },
+                    "followTikTok": {
+                      "type": "boolean"
+                    },
+                    "followInstagram": {
+                      "type": "boolean"
+                    },
+                    "birthdayMonth": {
+                      "type": "number"
+                    },
+                    "birthdayDay": {
+                      "type": "number"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "currentLoyaltyTierProgress": {
+                      "type": "number",
+                      "description": "Tracks their current progress through the loyalty tier platform as an absolute value. If your program follows a setup of 0 points = Bronze, 200 points = Silver, 500 points = Gold, a customer with a `currentLoyaltyTierProgress` of 201 would be in silver tier."
+                    },
+                    "currentLoyaltyTierId": {
+                      "type": "string"
+                    },
+                    "lifetimeStampsEarned": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/birthday": {
+      "put": {
+        "summary": "Update Birthday",
+        "description": "Updates the customer's birthday",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "birthdayDay": {
+                    "type": "integer"
+                  },
+                  "birthdayMonth": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/dynamic-link": {
+      "post": {
+        "summary": "Action Landing Page",
+        "description": "Action a landing page earn rule for a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "points": {
+                      "type": "integer"
+                    },
+                    "action": {
+                      "type": "string"
+                    },
+                    "updatedBalance": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/loyalty-card-lookup": {
+      "get": {
+        "summary": "Loyalty Card Lookup",
+        "description": "Lookup a customer based on the barcode/QR Code data related to that loyalty card. This endpoint has no authentication. As such, no sensitive information is returned from this endpoint.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lookup_key",
+            "description": "The lookup key associated with the loyalty card. This is the data used to generate the QR Code or Barcode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer has been found using the lookup key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The Influence.io internal ID of the customer"
+                    },
+                    "external_id": {
+                      "type": "string",
+                      "description": "The external ID of the customer. This is often your internal ID of the customer."
+                    },
+                    "point_balance": {
+                      "type": "integer",
+                      "description": "The current point balance of the customer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Could not find customer with lookup key"
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/points": {
+      "get": {
+        "summary": "List points activity",
+        "description": "Returns points activity for a customer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "digest",
+            "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+            "schema": {
+              "type": "string",
+              "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "shopId": {
+                            "type": "string"
+                          },
+                          "customerId": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "points": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "shopifyPriceRuleId": {
+                            "type": "string"
+                          },
+                          "shopifyDiscountCodeId": {
+                            "type": "string"
+                          },
+                          "couponCode": {
+                            "type": "string"
+                          },
+                          "customerNote": {
+                            "type": "string"
+                          },
+                          "customDescription": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "earnRuleId": {
+                            "type": "string"
+                          },
+                          "redeemRuleId": {
+                            "type": "string"
+                          },
+                          "rewardType": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "owner": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "nextToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/redeem": {
+      "post": {
+        "summary": "Redeem a reward",
+        "description": "Redeem a reward for a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  },
+                  "points": {
+                    "type": "integer",
+                    "description": "How many points to deduct from the user. Required and only used if earn rule type is increments"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "couponCode": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/referrals": {
+      "get": {
+        "summary": "List referral activity",
+        "description": "Returns referral activity for a customer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "customer_email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "digest",
+            "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+            "schema": {
+              "type": "string",
+              "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "completed",
+                "pending"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "shopId": {
+                            "type": "string"
+                          },
+                          "customerId": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "points": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "shopifyPriceRuleId": {
+                            "type": "string"
+                          },
+                          "shopifyDiscountCodeId": {
+                            "type": "string"
+                          },
+                          "couponCode": {
+                            "type": "string"
+                          },
+                          "customerNote": {
+                            "type": "string"
+                          },
+                          "customDescription": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "earnRuleId": {
+                            "type": "string"
+                          },
+                          "redeemRuleId": {
+                            "type": "string"
+                          },
+                          "rewardType": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "owner": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "nextToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/social": {
+      "post": {
+        "summary": "Action social",
+        "description": "Action a social media earn rule for a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "points": {
+                      "type": "integer"
+                    },
+                    "action": {
+                      "type": "string"
+                    },
+                    "updatedBalance": {
+                      "type": "integer"
+                    },
+                    "socialAction": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/stamps": {
+      "get": {
+        "summary": "Get current stamps",
+        "description": "Get current stamps for a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "stamps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "customerId": {
+                            "type": "string"
+                          },
+                          "stampCardSettingsId": {
+                            "type": "string"
+                          },
+                          "completedAt": {
+                            "type": "string"
+                          },
+                          "stampCount": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/customer/upload-file": {
+      "post": {
+        "summary": "Upload a File",
+        "description": "Action an \"Upload File\" earn rule. This earn rule is actioned in 2 parts;\n1. POST to this endpoint to create the point activity and register points against a customer. The post request also returns a presigned URL in the response body.\n2. Upload a file to a presigned URL generated from the previous step using a PUT request with the file contents as the body.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "string",
+                    "description": "Your shop key"
+                  },
+                  "digest": {
+                    "type": "string",
+                    "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+                  },
+                  "earnRuleId": {
+                    "type": "string"
+                  },
+                  "filename": {
+                    "type": "string",
+                    "example": "example.jpg"
+                  },
+                  "mimeType": {
+                    "type": "string",
+                    "description": "The content type of the file in the formate of a MIME type as defined by IETF's [RFC 6838](https://datatracker.ietf.org/doc/html/rfc6838)",
+                    "example": "image/jpeg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "A presigned URL to upload the file associated with the point activity created from this POST request."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shop not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "ShopRequired",
+                        "CustomerRequired"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "DigestMismatch"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "customer"
+        ]
+      }
+    },
+    "/v1/shop": {
+      "get": {
+        "summary": "Get Shop",
+        "description": "Returns information about the shop",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique Influence.io UUID for a shop"
+                    },
+                    "shopKey": {
+                      "type": "string",
+                      "description": "For Shopify stores, this is your myshopify URL. For other stores, we generate a permanent key from your domain name."
+                    },
+                    "storeCurrency": {
+                      "type": "string"
+                    },
+                    "pointCurrency": {
+                      "type": "string"
+                    },
+                    "pointStatus": {
+                      "type": "string"
+                    },
+                    "referralStatus": {
+                      "type": "string"
+                    },
+                    "referralAliasUrl": {
+                      "type": "string"
+                    },
+                    "tierStatus": {
+                      "type": "string"
+                    },
+                    "stampCardStatus": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/rules/earn": {
+      "get": {
+        "summary": "List earn rules",
+        "description": "Returns shop earn rules",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique Influence.io UUID for the earn rule"
+                          },
+                          "customTitle": {
+                            "type": "string"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "earnType": {
+                            "type": "string"
+                          },
+                          "earnValue": {
+                            "type": "string"
+                          },
+                          "willExpire": {
+                            "type": "string"
+                          },
+                          "startDate": {
+                            "type": "string"
+                          },
+                          "expiryDate": {
+                            "type": "string"
+                          },
+                          "socialUrl": {
+                            "type": "string"
+                          },
+                          "templateName": {
+                            "type": "string"
+                          },
+                          "limitTiers": {
+                            "type": "string"
+                          },
+                          "loyaltyTierIds": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "integrationEventName": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/rules/redeem": {
+      "get": {
+        "summary": "List redeem rules",
+        "description": "Returns shop redeem rules",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "reward_type",
+            "description": "Optional filter for specific reward types. Available values: Free shipping, Fixed amount discount, Percentage discount, Point donation, Product discount, Gift card, Subscription Free Shipping, Subscription Fixed amount discount, Subscription Percentage discount, POS amount discount, POS percentage discount, POS product discount.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "freeshipping",
+                "amountdiscount",
+                "fixedamountdiscount",
+                "percentageoff",
+                "pointdonation",
+                "productdiscount",
+                "giftcard",
+                "subscriptionfreeshipping",
+                "subscriptionfixedamountdiscount",
+                "subscriptionpercentageoff",
+                "pos_amountdiscount",
+                "pos_percentageoff",
+                "pos_productdiscount"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique Influence.io UUID for the redeem rule"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "customTitle": {
+                            "type": "string"
+                          },
+                          "pointCost": {
+                            "type": "integer"
+                          },
+                          "discountValue": {
+                            "type": "integer"
+                          },
+                          "templateName": {
+                            "type": "string"
+                          },
+                          "redeemType": {
+                            "type": "string"
+                          },
+                          "maxRedeemablePoints": {
+                            "type": "integer"
+                          },
+                          "minRedeemablePoints": {
+                            "type": "integer"
+                          },
+                          "minSpendAmount": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Unique Influence.io UUID for a shop"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "externalId": {
+                                "type": "string"
+                              },
+                              "imageUrl": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "referralStatus": {
+                                "type": "string"
+                              },
+                              "externalUrlHandle": {
+                                "type": "string"
+                              },
+                              "tierStatus": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "Unique Influence.io UUID for a shop"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "externalVariantId": {
+                                  "type": "string"
+                                },
+                                "externalProductId": {
+                                  "type": "string"
+                                },
+                                "imageUrl": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "position": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/rules/earn/{id}/exclusions/product": {
+      "get": {
+        "summary": "List earn product exclusions",
+        "description": "Returns list of excluded products for earn rule",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Earn Rule ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Unique Influence.io UUID for a shop"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "externalId": {
+                        "type": "string"
+                      },
+                      "imageUrl": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "referralStatus": {
+                        "type": "string"
+                      },
+                      "externalUrlHandle": {
+                        "type": "string"
+                      },
+                      "tierStatus": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/rules/earn/{id}/exclusions/variant": {
+      "get": {
+        "summary": "List earn product variant exclusions",
+        "description": "Returns list of excluded product variants for earn rule",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Earn Rule ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Unique Influence.io UUID for a shop"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "externalVariantId": {
+                        "type": "string"
+                      },
+                      "externalProductId": {
+                        "type": "string"
+                      },
+                      "imageUrl": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/rules/referral": {
+      "get": {
+        "summary": "List referral rules",
+        "description": "Returns shop referral rules",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique Influence.io UUID for the referral rule"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "customTitle": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "referralType": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/tiers": {
+      "get": {
+        "summary": "List loyalty tiers",
+        "description": "Returns shop loyalty tiers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique Influence.io UUID for the loyalty tier rule"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "threshold": {
+                            "type": "string"
+                          },
+                          "perks": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/tiers/{id}": {
+      "get": {
+        "summary": "Get a loyalty tier",
+        "description": "Fetch a loyalty tier by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Loyalty Tier ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tier": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Unique Influence.io UUID for the loyalty tier rule"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "threshold": {
+                          "type": "string"
+                        },
+                        "perks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tier not found"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    },
+    "/v1/shop/stamp-card": {
+      "get": {
+        "summary": "Get stamp card settings",
+        "description": "Returns shop stamp card settings",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "shop",
+            "description": "Your shop key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "stampCardSettings": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "slots": {
+                          "type": "integer"
+                        },
+                        "prefilledSlots": {
+                          "type": "integer"
+                        },
+                        "productId": {
+                          "type": "string"
+                        },
+                        "collectionId": {
+                          "type": "string"
+                        },
+                        "wholeOrder": {
+                          "type": "boolean"
+                        },
+                        "minimumOrderAmount": {
+                          "type": "string"
+                        },
+                        "widgetStyles": {
+                          "type": "string",
+                          "description": "JSON string"
+                        },
+                        "widgetSettings": {
+                          "type": "string",
+                          "description": "JSON string"
+                        },
+                        "widgetContent": {
+                          "type": "string",
+                          "description": "JSON string"
+                        },
+                        "cooldown": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "rewardRules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "shopId": {
+                            "type": "string"
+                          },
+                          "stampCardSettingsId": {
+                            "type": "string"
+                          },
+                          "position": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "customTitle": {
+                            "type": "string"
+                          },
+                          "templateName": {
+                            "type": "string"
+                          },
+                          "pointsToAward": {
+                            "type": "integer"
+                          },
+                          "discountValue": {
+                            "type": "integer"
+                          },
+                          "minRedeemablePoints": {
+                            "type": "integer"
+                          },
+                          "maxRedeemablePoints": {
+                            "type": "integer"
+                          },
+                          "appliesTo": {
+                            "type": "string"
+                          },
+                          "appliesToProductId": {
+                            "type": "string"
+                          },
+                          "appliesToCollectionId": {
+                            "type": "string"
+                          },
+                          "minSpendAmount": {
+                            "type": "integer"
+                          },
+                          "maxShippingAmount": {
+                            "type": "integer"
+                          },
+                          "variantIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "discountPrefixValue": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "customerCount": {
+                            "type": "integer"
+                          },
+                          "externalPromotionId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shop not found with shopKey"
+          }
+        },
+        "tags": [
+          "shop"
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "shopifyCustomerDigest": {
+        "in": "query",
+        "name": "digest",
+        "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. Refer to the digest schema for more information",
+        "schema": {
+          "type": "string",
+          "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+        }
+      }
+    },
+    "responses": {
+      "400ShopifyCustomerDigestBadRequest": {
+        "description": "Shop not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "enum": [
+                    "ShopRequired",
+                    "CustomerRequired"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "401ShopifyCustomerDigestDigestMismatch": {
+        "description": "This response is return if either the shop is not found, the customer is not found or the digest is mismatched. The exact reason for digest matching failing is not given for security reasons.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "enum": [
+                    "DigestMismatch"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for a customer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "customerType": {
+            "type": "string"
+          },
+          "referralLink": {
+            "type": "string"
+          },
+          "referralsCompleted": {
+            "type": "integer"
+          },
+          "shopifyCustomerId": {
+            "type": "string"
+          },
+          "pointBalance": {
+            "type": "integer"
+          },
+          "shareFacebook": {
+            "type": "boolean"
+          },
+          "shareTwitter": {
+            "type": "boolean"
+          },
+          "likeFacebook": {
+            "type": "boolean"
+          },
+          "followTwitter": {
+            "type": "boolean"
+          },
+          "followTikTok": {
+            "type": "boolean"
+          },
+          "followInstagram": {
+            "type": "boolean"
+          },
+          "birthdayMonth": {
+            "type": "number"
+          },
+          "birthdayDay": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "currentLoyaltyTierProgress": {
+            "type": "number",
+            "description": "Tracks their current progress through the loyalty tier platform as an absolute value. If your program follows a setup of 0 points = Bronze, 200 points = Silver, 500 points = Gold, a customer with a `currentLoyaltyTierProgress` of 201 would be in silver tier."
+          },
+          "currentLoyaltyTierId": {
+            "type": "string"
+          },
+          "lifetimeStampsEarned": {
+            "type": "integer"
+          }
+        }
+      },
+      "digest": {
+        "type": "string",
+        "description": "An HMAC digest created by concatenating the Shopify customer ID, customer email and your shop key, using your API secret at the key. If you are using the \"Headless\" widget, you can access the `data-customer-digest` property that is automatically generated when a customer logs into your Shopify store."
+      },
+      "earnRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for the earn rule"
+          },
+          "customTitle": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "earnType": {
+            "type": "string"
+          },
+          "earnValue": {
+            "type": "string"
+          },
+          "willExpire": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string"
+          },
+          "socialUrl": {
+            "type": "string"
+          },
+          "templateName": {
+            "type": "string"
+          },
+          "limitTiers": {
+            "type": "string"
+          },
+          "loyaltyTierIds": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "integrationEventName": {
+            "type": "string"
+          }
+        }
+      },
+      "loyaltyTier": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for the loyalty tier rule"
+          },
+          "title": {
+            "type": "string"
+          },
+          "threshold": {
+            "type": "string"
+          },
+          "perks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "pointActivity": {
+        "type": "object",
+        "properties": {
+          "shopId": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "points": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "shopifyPriceRuleId": {
+            "type": "string"
+          },
+          "shopifyDiscountCodeId": {
+            "type": "string"
+          },
+          "couponCode": {
+            "type": "string"
+          },
+          "customerNote": {
+            "type": "string"
+          },
+          "customDescription": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "earnRuleId": {
+            "type": "string"
+          },
+          "redeemRuleId": {
+            "type": "string"
+          },
+          "rewardType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          }
+        }
+      },
+      "product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for a shop"
+          },
+          "title": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "referralStatus": {
+            "type": "string"
+          },
+          "externalUrlHandle": {
+            "type": "string"
+          },
+          "tierStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "productVariant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for a shop"
+          },
+          "title": {
+            "type": "string"
+          },
+          "externalVariantId": {
+            "type": "string"
+          },
+          "externalProductId": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
+      },
+      "redeemRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for the redeem rule"
+          },
+          "title": {
+            "type": "string"
+          },
+          "customTitle": {
+            "type": "string"
+          },
+          "pointCost": {
+            "type": "integer"
+          },
+          "discountValue": {
+            "type": "integer"
+          },
+          "templateName": {
+            "type": "string"
+          },
+          "redeemType": {
+            "type": "string"
+          },
+          "maxRedeemablePoints": {
+            "type": "integer"
+          },
+          "minRedeemablePoints": {
+            "type": "integer"
+          },
+          "minSpendAmount": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "product": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique Influence.io UUID for a shop"
+              },
+              "title": {
+                "type": "string"
+              },
+              "externalId": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "referralStatus": {
+                "type": "string"
+              },
+              "externalUrlHandle": {
+                "type": "string"
+              },
+              "tierStatus": {
+                "type": "string"
+              }
+            }
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique Influence.io UUID for a shop"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "externalVariantId": {
+                  "type": "string"
+                },
+                "externalProductId": {
+                  "type": "string"
+                },
+                "imageUrl": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "referralRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for the referral rule"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "customTitle": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "referralType": {
+            "type": "string"
+          }
+        }
+      },
+      "shop": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Influence.io UUID for a shop"
+          },
+          "shopKey": {
+            "type": "string",
+            "description": "For Shopify stores, this is your myshopify URL. For other stores, we generate a permanent key from your domain name."
+          },
+          "storeCurrency": {
+            "type": "string"
+          },
+          "pointCurrency": {
+            "type": "string"
+          },
+          "pointStatus": {
+            "type": "string"
+          },
+          "referralStatus": {
+            "type": "string"
+          },
+          "referralAliasUrl": {
+            "type": "string"
+          },
+          "tierStatus": {
+            "type": "string"
+          },
+          "stampCardStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "stampCardRewardRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "shopId": {
+            "type": "string"
+          },
+          "stampCardSettingsId": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "customTitle": {
+            "type": "string"
+          },
+          "templateName": {
+            "type": "string"
+          },
+          "pointsToAward": {
+            "type": "integer"
+          },
+          "discountValue": {
+            "type": "integer"
+          },
+          "minRedeemablePoints": {
+            "type": "integer"
+          },
+          "maxRedeemablePoints": {
+            "type": "integer"
+          },
+          "appliesTo": {
+            "type": "string"
+          },
+          "appliesToProductId": {
+            "type": "string"
+          },
+          "appliesToCollectionId": {
+            "type": "string"
+          },
+          "minSpendAmount": {
+            "type": "integer"
+          },
+          "maxShippingAmount": {
+            "type": "integer"
+          },
+          "variantIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "discountPrefixValue": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "customerCount": {
+            "type": "integer"
+          },
+          "externalPromotionId": {
+            "type": "string"
+          }
+        }
+      },
+      "stampCardSettings": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "stampCardSettings": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string"
+              },
+              "slots": {
+                "type": "integer"
+              },
+              "prefilledSlots": {
+                "type": "integer"
+              },
+              "productId": {
+                "type": "string"
+              },
+              "collectionId": {
+                "type": "string"
+              },
+              "wholeOrder": {
+                "type": "boolean"
+              },
+              "minimumOrderAmount": {
+                "type": "string"
+              },
+              "widgetStyles": {
+                "type": "string",
+                "description": "JSON string"
+              },
+              "widgetSettings": {
+                "type": "string",
+                "description": "JSON string"
+              },
+              "widgetContent": {
+                "type": "string",
+                "description": "JSON string"
+              },
+              "cooldown": {
+                "type": "integer"
+              }
+            }
+          },
+          "rewardRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "shopId": {
+                  "type": "string"
+                },
+                "stampCardSettingsId": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "customTitle": {
+                  "type": "string"
+                },
+                "templateName": {
+                  "type": "string"
+                },
+                "pointsToAward": {
+                  "type": "integer"
+                },
+                "discountValue": {
+                  "type": "integer"
+                },
+                "minRedeemablePoints": {
+                  "type": "integer"
+                },
+                "maxRedeemablePoints": {
+                  "type": "integer"
+                },
+                "appliesTo": {
+                  "type": "string"
+                },
+                "appliesToProductId": {
+                  "type": "string"
+                },
+                "appliesToCollectionId": {
+                  "type": "string"
+                },
+                "minSpendAmount": {
+                  "type": "integer"
+                },
+                "maxShippingAmount": {
+                  "type": "integer"
+                },
+                "variantIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discountPrefixValue": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string"
+                },
+                "customerCount": {
+                  "type": "integer"
+                },
+                "externalPromotionId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "stampCardStamp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "stampCardSettingsId": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": "string"
+          },
+          "stampCount": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

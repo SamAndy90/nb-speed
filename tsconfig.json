@@ -1,0 +1,57 @@
+{
+    "compilerOptions": {
+        "noErrorTruncation": true,
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            },
+            {
+                "name": "@0no-co/graphqlsp",
+                "schemas": [
+                    {
+                        "name": "Shopify Storefront API",
+                        "schema": "./storefront-graphql.schema.json"
+                    },
+                    {
+                        "name": "Shopify Admin API",
+                        "schema": "./admin-graphql.schema.json"
+                    }
+                ],
+                "shouldCheckForColocatedFragments": false
+            }
+        ],
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "target": "ES2017"
+    },
+    "include": [
+        "svgr.d.ts",
+        ".next/types/**/*.ts",
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "vitest/globals",
+        "vitest.config.mts"
+    ],
+    "exclude": [
+        "node_modules",
+        ".git",
+        "coverage",
+        ".next/cache",
+        ".next/server",
+        ".next/static"
+    ]
+}

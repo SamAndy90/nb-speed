@@ -1,0 +1,84 @@
+{
+  "redirects": [
+    {
+      "source": "/pages/sweatcoin-duo",
+      "destination": "https://uk.nutriburstvitamins.com/pages/sweatcoin-duo",
+      "permanent": true
+    },
+    {
+      "source": "/pages/mary-earps-tips",
+      "destination": "https://uk.nutriburstvitamins.com/pages/mary-earps-tips",
+      "permanent": true
+    },
+    {
+      "source": "/pages/spond-v2",
+      "destination": "https://uk.nutriburstvitamins.com/pages/spond-v2",
+      "permanent": true
+    },
+    {
+      "source": "/pages/spond",
+      "destination": "https://uk.nutriburstvitamins.com/pages/spond",
+      "permanent": true
+    },
+    {
+      "source": "/pages/sweatcoin",
+      "destination": "https://uk.nutriburstvitamins.com/pages/sweatcoin",
+      "permanent": true
+    },
+    {
+      "source": "/pages/ash-nutri",
+      "destination": "https://uk.nutriburstvitamins.com/pages/ash-nutri",
+      "permanent": true
+    },
+    {
+      "source": "/pages/minions",
+      "destination": "https://uk.nutriburstvitamins.com/pages/minions",
+      "permanent": true
+    },
+    {
+      "source": "/pages/maryearps",
+      "destination": "https://uk.nutriburstvitamins.com/pages/maryearps",
+      "permanent": true
+    },
+    {
+      "source": "/pages/nutrigreen-v3",
+      "destination": "https://uk.nutriburstvitamins.com/pages/nutrigreen-v3",
+      "permanent": true
+    },
+    {
+      "source": "/pages/trolls",
+      "destination": "https://uk.nutriburstvitamins.com/pages/trolls",
+      "permanent": true
+    },
+    {
+      "source": "/pages/ashwagandha-v4",
+      "destination": "https://uk.nutriburstvitamins.com/pages/ashwagandha-v4",
+      "permanent": true
+    },
+    {
+      "source": "/pages/hsn-v3-1",
+      "destination": "https://uk.nutriburstvitamins.com/pages/hsn-v3-1",
+      "permanent": true
+    },
+    {
+      "source": "/pages/customer-rewards",
+      "destination": "https://uk.nutriburstvitamins.com/pages/customer-rewards",
+      "permanent": true
+    },
+    {
+      "source": "/pages/rewards",
+      "destination": "https://uk.nutriburstvitamins.com/pages/rewards",
+      "permanent": true
+    },
+    {
+      "source": "/pages/referral-program",
+      "destination": "https://uk.nutriburstvitamins.com/pages/referral-program",
+      "permanent": true
+    },
+    {
+      "source": "/pages/contact-us",
+      "destination": "https://uk.nutriburstvitamins.com/pages/contact-us",
+      "permanent": true
+    }
+  ]
+}

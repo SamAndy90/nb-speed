@@ -1,0 +1,1 @@
+export const ITEM_ADDED_TO_CART_TOAST_MESSAGE = 'Item added to cart';
