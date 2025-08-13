@@ -1,4 +1,5 @@
 'use client';
+
 import { HeroOption } from '@/features/landing/types';
 import { ProductSection } from '@/features/product/components/ProductSection';
 import { cn } from '@/lib/utils';
@@ -164,7 +165,6 @@ export function Hero({ options }: { options: HeroOption[] }) {
         return () => clearInterval(interval);
     }, []);
 
-    const containerRef = useRef<HTMLDivElement>(null);
     return (
         <Container>
             <MotionProductSection
@@ -222,6 +222,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                 </MotionHeroHeading>
                             </AnimatePresence>
                         </MotionDiv>
+
                         <MotionParagraph
                             text={
                                 'No more slipping up: a wellness routine that sticks with you'
@@ -245,7 +246,6 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                     src={InformedSport}
                                     alt=""
                                     className="object-top"
-                                    priority
                                 />
                                 <HeroIconLabel>Informed Sport</HeroIconLabel>
                             </HeroIconCard>
@@ -304,7 +304,6 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                     src={InformedSport}
                                     alt=""
                                     className="object-top"
-                                    priority
                                 />
                                 <HeroIconLabel>Informed Sport</HeroIconLabel>
                             </HeroIconCard>
@@ -378,6 +377,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                         </MotionDiv>
                     </div>
                 </div>
+
                 <p className="text-paragraph-4 font-bold">As seen in</p>
                 <div className="flex w-full overflow-clip">
                     <HeroMarquee>
@@ -407,7 +407,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                         />
                         <HeroBrandImage
                             src={theTimes}
-                            alt=""
+                            alt="Badge"
                             i={3}
                             sizes={'(min-width: 1024px) 25vw, 33vw'}
                             count={4}

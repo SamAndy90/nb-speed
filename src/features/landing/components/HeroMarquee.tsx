@@ -1,4 +1,5 @@
 'use client';
+
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { PropsWithChildren, ReactNode } from 'react';
 import Marquee from 'react-fast-marquee';

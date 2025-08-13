@@ -265,7 +265,6 @@ export function CarouselCard({
                 fill
                 className="select-none object-cover"
                 draggable={false}
-                loading="eager"
                 priority
                 sizes={
                     '(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw'

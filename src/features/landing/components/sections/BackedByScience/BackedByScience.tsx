@@ -1,10 +1,6 @@
 'use client';
 
 import { Product } from '@/features/product/types';
-type BackedByScienceProps = {
-    collections: { title: string; handle: string; products: Product[] }[];
-    reviews: { handle: string; ratings: ProductRatingBatch[] }[];
-};
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { useMemo, useState } from 'react';
@@ -13,20 +9,25 @@ import { Button } from '@/components/ui/button';
 import { Swiper as SwiperType } from 'swiper/types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import dynamic from 'next/dynamic';
 import { ProductRatingBatch } from '@/lib/reviews/types';
 import { motion } from 'framer-motion';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
 import Link from 'next/link';
 import { MainUrls } from '@/route-urls';
+import RecommendationCardItem from '@/features/product/components/sections/YouMayAlsoLike/RecommendationCardItem';
 
-const RecommendationCardItem = dynamic(
-    () =>
-        import(
-            '@/features/product/components/sections/YouMayAlsoLike/RecommendationCardItem'
-        ),
-    { ssr: false }
-);
+type BackedByScienceProps = {
+    collections: { title: string; handle: string; products: Product[] }[];
+    reviews: { handle: string; ratings: ProductRatingBatch[] }[];
+};
+
+// const RecommendationCardItem = dynamic(
+//     () =>
+//         import(
+//             '@/features/product/components/sections/YouMayAlsoLike/RecommendationCardItem'
+//         ),
+//     { ssr: false }
+// );
 export function BackedByScience({
     collections,
     reviews,

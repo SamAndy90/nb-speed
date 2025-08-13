@@ -10,7 +10,7 @@ import { HeroOption } from '@/features/landing/types';
 import bundleBlue from '@/assets/hero-bundles/hero-bundle-blue.webp';
 import bundleGreen from '@/assets/hero-bundles/hero-bundle-green.webp';
 import bundlePink from '@/assets/hero-bundles/hero-bundle-pink.webp';
-import { BackedByScience as UIBackedByScience } from '@/features/landing/components/sections/BackedByScience';
+import { CBackedByScience } from '@/features/landing/components/sections/BackedByScience/CBackedByScience';
 import { getCollections } from '@/features/shopify/api/collection';
 import { getFragmentData } from '@/gql/storefront';
 import { collectionFragment } from '@/features/shopify/graphql/storefront/fragments/collection';
@@ -44,13 +44,6 @@ const CompetitionModal = dynamic(
         ssr: false,
     }
 );
-
-/*
-pink: 'hsl(var(--accent-pink))',
-                    'ocean-blue': 'hsl(var(--accent-ocean-blue))',
-                    'tech-blue': 'hsl(var(--accent-tech-blue))',
-                    orange: 'hsl(var(--accent-orange))',
-                    green: 'hsl(var(--accent-green))'*/
 
 const heroOptions: HeroOption[] = [
     {
@@ -177,7 +170,7 @@ async function BackedByScience() {
             };
         })
     );
-    return <UIBackedByScience collections={collectionMap} reviews={reviews} />;
+    return <CBackedByScience collections={collectionMap} reviews={reviews} />;
 }
 
 async function BlogPosts() {
