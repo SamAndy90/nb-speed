@@ -42,7 +42,7 @@ export default async function RootLayout({
                 <meta name="author" content="Voelcker Design" />
                 <meta name="designer" content="Voelcker Design" />
 
-                <Script
+                {/* <Script
                     id="clarity-script"
                     strategy="afterInteractive"
                     dangerouslySetInnerHTML={{
@@ -52,7 +52,7 @@ export default async function RootLayout({
                         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                         })(window, document, "clarity", "script", "i15d4ji0c3");`,
                     }}
-                />
+                /> */}
             </head>
 
             <body
@@ -62,14 +62,14 @@ export default async function RootLayout({
                     fontSans.variable
                 )}>
                 <ConsoleCredit />
-                <SeoCredit />
+                {/* <SeoCredit /> */}
                 <Providers>
-                    {mobileMenu && desktopMenu && (
+                    {/* {mobileMenu && desktopMenu && (
                         <Header
                             mobileMenu={mobileMenu}
                             desktopMenu={desktopMenu}
                         />
-                    )}
+                    )} */}
 
                     {children}
                     <CookieConsent />
