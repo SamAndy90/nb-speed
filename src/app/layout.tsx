@@ -64,12 +64,12 @@ export default async function RootLayout({
                 <ConsoleCredit />
                 {/* <SeoCredit /> */}
                 <Providers>
-                    {/* {mobileMenu && desktopMenu && (
+                    {mobileMenu && desktopMenu && (
                         <Header
                             mobileMenu={mobileMenu}
                             desktopMenu={desktopMenu}
                         />
-                    )} */}
+                    )}
 
                     {children}
                     {/* <CookieConsent /> */}
