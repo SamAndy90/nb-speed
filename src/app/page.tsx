@@ -94,12 +94,12 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen w-full flex-col items-center justify-between overflow-x-hidden">
             <LazyM>
-                {/* <GradientBackground variant="section-2">
-                <Hero options={heroOptions} />
-                <Suspense fallback={<Loader />}>
-                    <BackedByScience />
-                </Suspense>
-            </GradientBackground> */}
+                <GradientBackground variant="section-2">
+                    <Hero options={heroOptions} />
+                    <Suspense fallback={<Loader />}>
+                        <BackedByScience />
+                    </Suspense>
+                </GradientBackground>
                 {/* <Founder /> */}
                 {/* <CompetitionModal
                 headingText="Buy 2 Nutriburst Minion Products for a chance to"

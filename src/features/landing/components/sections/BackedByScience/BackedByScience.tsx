@@ -10,7 +10,7 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ProductRatingBatch } from '@/lib/reviews/types';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
 import Link from 'next/link';
 import { MainUrls } from '@/route-urls';
@@ -95,7 +95,7 @@ export function BackedByScience({
         <section className="flex w-full flex-col gap-10 overflow-hidden pb-[50px] pt-[100px] lg:gap-[60px] lg:pb-[120px] lg:pt-[50px]">
             <Container>
                 <h2 className="flex flex-col">
-                    <motion.b
+                    <m.b
                         initial={{ opacity: 0, y: -10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{
@@ -106,7 +106,7 @@ export function BackedByScience({
                         viewport={{ once: true }}
                         className="self-start bg-cooper-text-gradient bg-clip-text text-transparent">
                         Backed by Science.
-                    </motion.b>
+                    </m.b>
                     <MotionSpan text={'designed for flavour'} />
                 </h2>
                 <div className="mt-10 flex flex-col justify-between gap-4 sm:flex-row lg:mt-[60px]">
