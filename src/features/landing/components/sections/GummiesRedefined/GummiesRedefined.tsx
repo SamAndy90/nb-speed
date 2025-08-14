@@ -18,7 +18,7 @@ import highly from '@/assets/landing-accordion/collagen-revive.webp';
 import highlyCropped from '@/assets/landing-accordion/collagen-revive-cropped.webp';
 import { cn } from '@/lib/utils';
 import Container from '@/components/container';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
 
 const images: Record<string, ImageProps & { srcMobile: ImageProps['src'] }> = {
@@ -58,7 +58,7 @@ export function GummiesRedefined() {
             <ProductSection className="flex flex-col gap-8 px-0 py-[100px] md:px-0 lg:py-[120px]">
                 <div>
                     <h2 className="font-medium text-theme-v2">
-                        <motion.span
+                        <m.span
                             initial={{ opacity: 0, y: -10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
@@ -71,7 +71,7 @@ export function GummiesRedefined() {
                                 'self-start bg-cooper-text-gradient bg-clip-text text-transparent'
                             }>
                             The Nutriburst Formula:
-                        </motion.span>{' '}
+                        </m.span>{' '}
                         <br />
                         <MotionSpan
                             text={'Power, Taste, & Science'}

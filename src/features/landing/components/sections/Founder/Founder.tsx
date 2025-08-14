@@ -4,7 +4,7 @@ import React from 'react';
 import founderImage from '@/assets/founder.webp';
 import founderMobileImage from '@/assets/founder-mobile.webp';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MotionTitle } from '@/components/motion-components/MotionTitle';
 import { MotionParagraph } from '@/components/motion-components/MotionParagraph';
 import { MotionDiv } from '@/components/motion-components/MotionDiv';

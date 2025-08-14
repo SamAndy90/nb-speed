@@ -100,46 +100,46 @@ export default async function Home() {
                         <BackedByScience />
                     </Suspense>
                 </GradientBackground>
-                {/* <Founder /> */}
-                {/* <CompetitionModal
-                headingText="Buy 2 Nutriburst Minion Products for a chance to"
-                actionText="WIN"
-                prizeDescription="A family holiday for 4 to Minion World in Orlando, Florida"
-                ctaText="Shop Minion"
-                competitionUrl="/collections/all-products?query=Minion"
-                learnMoreUrl="/pages/minions-win"
-                imageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Group_13c590ff-4f30-4f88-b959-2363a82e8093.png?v=1751632470"
-                imageAlt="Minions Competition"
-                mobileImageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Minions_Mega_Multi_PDP_01.png?v=1751879554"
-                sessionStorageKey="minions-competition-modal-shown"
-            /> */}
+                <Founder />
+                <CompetitionModal
+                    headingText="Buy 2 Nutriburst Minion Products for a chance to"
+                    actionText="WIN"
+                    prizeDescription="A family holiday for 4 to Minion World in Orlando, Florida"
+                    ctaText="Shop Minion"
+                    competitionUrl="/collections/all-products?query=Minion"
+                    learnMoreUrl="/pages/minions-win"
+                    imageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Group_13c590ff-4f30-4f88-b959-2363a82e8093.png?v=1751632470"
+                    imageAlt="Minions Competition"
+                    mobileImageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Minions_Mega_Multi_PDP_01.png?v=1751879554"
+                    sessionStorageKey="minions-competition-modal-shown"
+                />
                 <Suspense fallback={null}>
                     <ReferrerToast />
                 </Suspense>
-                {/* <GummiesRedefined /> */}
-                {/* <DiscoverOurCollections /> */}
+                <GummiesRedefined />
+                <DiscoverOurCollections />
                 <SectionSpacer hasBackground={true} />
-                {/* <GradientBackground variant="section-3">
-                <LovedBy />
-            </GradientBackground> */}
+                <GradientBackground variant="section-3">
+                    <LovedBy />
+                </GradientBackground>
                 <SectionSpacer hasBackground={true} />
-                {/* <GotQuestions /> */}
+                <GotQuestions />
                 <SectionSpacer hasBackground={true} />
-                {/* <FindUsIn /> */}
+                <FindUsIn />
                 <SectionSpacer hasBackground={true} />
-                {/* <TrustedByExperts /> */}
-                {/* <InstagramFeeds /> */}
-                {/* <GradientBackground variant="section-4">
-                <Suspense fallback={<Loader />}>
-                    <BlogPosts />
-                </Suspense>
-            </GradientBackground> */}
+                <TrustedByExperts />
+                <InstagramFeeds />
+                <GradientBackground variant="section-4">
+                    <Suspense fallback={<Loader />}>
+                        <BlogPosts />
+                    </Suspense>
+                </GradientBackground>
                 <JoinTheCommunity />
                 <SectionSpacer hasBackground={true} />
-                {/* <Footer
-                desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
-                mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
-            /> */}
+                <Footer
+                    desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
+                    mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
+                />
             </LazyM>
         </main>
     );

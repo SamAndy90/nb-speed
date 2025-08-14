@@ -7,7 +7,7 @@ import Container from '@/components/container';
 import { useEffect, useRef, useState } from 'react';
 import { Article } from '@/features/blog/types';
 import BlogAuthor from '@/features/blog/blog-author/blog-author';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
 import { MainUrls } from '@/route-urls';
 
@@ -49,7 +49,7 @@ export function BlogPosts({ articles }: { articles: Article[] }) {
                 <h2>
                     <MotionSpan text={'Health & Wellness Hub'} />
                     <br />
-                    <motion.b
+                    <m.b
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{
@@ -60,7 +60,7 @@ export function BlogPosts({ articles }: { articles: Article[] }) {
                         viewport={{ once: true }}
                         className="inline-block bg-cooper-text-gradient bg-clip-text text-transparent">
                         See our latest news
-                    </motion.b>
+                    </m.b>
                 </h2>
                 <Button
                     asChild

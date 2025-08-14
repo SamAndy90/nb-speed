@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { PropsWithClassName } from '@/types';
 import {
     AnimatePresence,
-    motion,
+    m,
     MotionValue,
     useMotionValue,
     useMotionValueEvent,
@@ -29,7 +29,7 @@ function CarouselCardText({
     card: CarouselPerson;
 }) {
     return (
-        <motion.div
+        <m.div
             variants={{
                 hide: { z: -500, opacity: 0 },
                 show: { z: 0, y: 0, opacity: 1 },
@@ -45,7 +45,7 @@ function CarouselCardText({
                 <div className="text-xs md:text-sm">{subtitle}</div>
             </div>
             <div className="oblique">“{quote}”</div>
-        </motion.div>
+        </m.div>
     );
 }
 function CarouselControls({
@@ -136,7 +136,7 @@ export function CardCarousel({ cards }: { cards: CarouselPerson[] }) {
 
     return (
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-            <motion.div
+            <m.div
                 className="relative mb-2 h-96 min-h-96 w-full grow cursor-grab touch-none md:mb-16 md:mt-20 md:h-[50vh]"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
@@ -158,7 +158,7 @@ export function CardCarousel({ cards }: { cards: CarouselPerson[] }) {
                     scroll.set(dir / count);
                     setMouseDown(false);
                 }}>
-                <motion.div
+                <m.div
                     className={cn(
                         'absolute flex h-full w-full flex-wrap items-center justify-center',
                         mouseDown && 'cursor-grabbing'
@@ -183,8 +183,8 @@ export function CardCarousel({ cards }: { cards: CarouselPerson[] }) {
                             card={c}
                         />
                     ))}
-                </motion.div>
-            </motion.div>
+                </m.div>
+            </m.div>
 
             <div className="w-full max-w-[28rem] px-3 text-center md:space-y-4">
                 <div
@@ -242,7 +242,7 @@ export function CarouselCard({
     );*/
 
     return (
-        <motion.div
+        <m.div
             className={cn(
                 `absolute flex aspect-[371/446] w-[371px] select-none items-center justify-center overflow-hidden rounded-lg text-lg`,
                 className
@@ -270,6 +270,6 @@ export function CarouselCard({
                     '(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw'
                 }
             />
-        </motion.div>
+        </m.div>
     );
 }
