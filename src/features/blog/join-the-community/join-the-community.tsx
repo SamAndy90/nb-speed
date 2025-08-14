@@ -14,7 +14,7 @@ import Avatar5 from '@/features/landing/assets/news-letter-section/avatar-5.webp
 import NewsletterInputWithButton from '@/components/newsletter-input-width-button';
 import { MotionDiv } from '@/components/motion-components/MotionDiv';
 import { MotionParagraph } from '@/components/motion-components/MotionParagraph';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export const LeftSection = () => {
     return (
@@ -37,7 +37,7 @@ export const LeftSection = () => {
                         alt="left-image"
                     />
                 </MotionDiv>
-                <motion.span
+                <m.span
                     initial={{ opacity: 0, x: '100%', y: -70 }}
                     whileInView={{ opacity: 1, x: '100%', y: 0 }}
                     transition={{
@@ -52,8 +52,8 @@ export const LeftSection = () => {
                         boxShadow: '0px 6.69px 17.24px 0px #B1B1B140',
                     }}>
                     Receive 10% off
-                </motion.span>
-                <motion.div
+                </m.span>
+                <m.div
                     initial={'hidden'}
                     whileInView={'visible'}
                     transition={{
@@ -63,7 +63,7 @@ export const LeftSection = () => {
                     }}
                     viewport={{ once: true }}
                     className="absolute bottom-12 left-[65px] flex -space-x-4 bg-transparent md:-space-x-6">
-                    <motion.span
+                    <m.span
                         variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0 },
@@ -80,8 +80,8 @@ export const LeftSection = () => {
                             sizes="80px"
                             className="inset-1 h-full w-full rounded-full object-cover"
                         />
-                    </motion.span>
-                    <motion.span
+                    </m.span>
+                    <m.span
                         variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0 },
@@ -98,8 +98,8 @@ export const LeftSection = () => {
                             sizes="80px"
                             className="inset-1 h-full w-full rounded-full object-cover"
                         />
-                    </motion.span>
-                    <motion.span
+                    </m.span>
+                    <m.span
                         variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0 },
@@ -116,8 +116,8 @@ export const LeftSection = () => {
                             sizes="80px"
                             className="inset-1 h-full w-full rounded-full object-cover"
                         />
-                    </motion.span>
-                    <motion.span
+                    </m.span>
+                    <m.span
                         variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0 },
@@ -134,8 +134,8 @@ export const LeftSection = () => {
                             sizes="80px"
                             className="inset-1 h-full w-full rounded-full object-cover"
                         />
-                    </motion.span>
-                    <motion.span
+                    </m.span>
+                    <m.span
                         variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0 },
@@ -152,8 +152,8 @@ export const LeftSection = () => {
                             sizes="80px"
                             className="inset-1 h-full w-full rounded-full object-cover"
                         />
-                    </motion.span>
-                </motion.div>
+                    </m.span>
+                </m.div>
             </div>
             <div className="flex flex-1 items-end overflow-hidden">
                 <MotionDiv

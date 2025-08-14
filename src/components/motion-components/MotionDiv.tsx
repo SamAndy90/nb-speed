@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { m, HTMLMotionProps } from 'framer-motion';
 
 type MotionDivProps = {
     children: React.ReactNode;
@@ -9,8 +9,8 @@ type MotionDivProps = {
     HTMLMotionProps<'div'>;
 export function MotionDiv({ children, className, ...props }: MotionDivProps) {
     return (
-        <motion.div {...props} className={cn(className)}>
+        <m.div {...props} className={cn(className)}>
             {children}
-        </motion.div>
+        </m.div>
     );
 }

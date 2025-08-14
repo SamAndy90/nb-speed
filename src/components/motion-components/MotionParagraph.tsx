@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 type MotionParagraphProps = {
     text: string;
@@ -11,7 +11,7 @@ export function MotionParagraph({
     className,
 }: MotionParagraphProps) {
     return (
-        <motion.p
+        <m.p
             initial={'hidden'}
             whileInView={'visible'}
             transition={{
@@ -20,7 +20,7 @@ export function MotionParagraph({
             viewport={{ once: true }}
             className={cn(className)}>
             {[...text].map((char, i) => (
-                <motion.span
+                <m.span
                     key={char + i}
                     variants={{
                         hidden: {
@@ -35,8 +35,8 @@ export function MotionParagraph({
                         ease: [0.4, 0.0, 0.2, 1],
                     }}>
                     {char}
-                </motion.span>
+                </m.span>
             ))}
-        </motion.p>
+        </m.p>
     );
 }

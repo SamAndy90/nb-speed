@@ -36,6 +36,7 @@ import SectionSpacer from '@/components/SectionSpacer';
 import InstagramFeeds from '@/components/InstagramFeeds';
 import { Loader } from '@/components/Loader';
 import dynamic from 'next/dynamic';
+import LazyM from '@/components/motion-components/LazyM';
 
 const CompetitionModal = dynamic(
     () =>
@@ -92,14 +93,15 @@ const heroOptions: HeroOption[] = [
 export default async function Home() {
     return (
         <main className="flex min-h-screen w-full flex-col items-center justify-between overflow-x-hidden">
-            {/* <GradientBackground variant="section-2">
+            <LazyM>
+                {/* <GradientBackground variant="section-2">
                 <Hero options={heroOptions} />
                 <Suspense fallback={<Loader />}>
                     <BackedByScience />
                 </Suspense>
             </GradientBackground> */}
-            {/* <Founder /> */}
-            {/* <CompetitionModal
+                {/* <Founder /> */}
+                {/* <CompetitionModal
                 headingText="Buy 2 Nutriburst Minion Products for a chance to"
                 actionText="WIN"
                 prizeDescription="A family holiday for 4 to Minion World in Orlando, Florida"
@@ -111,33 +113,34 @@ export default async function Home() {
                 mobileImageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Minions_Mega_Multi_PDP_01.png?v=1751879554"
                 sessionStorageKey="minions-competition-modal-shown"
             /> */}
-            <Suspense fallback={null}>
-                <ReferrerToast />
-            </Suspense>
-            {/* <GummiesRedefined /> */}
-            {/* <DiscoverOurCollections /> */}
-            <SectionSpacer hasBackground={true} />
-            {/* <GradientBackground variant="section-3">
+                <Suspense fallback={null}>
+                    <ReferrerToast />
+                </Suspense>
+                {/* <GummiesRedefined /> */}
+                {/* <DiscoverOurCollections /> */}
+                <SectionSpacer hasBackground={true} />
+                {/* <GradientBackground variant="section-3">
                 <LovedBy />
             </GradientBackground> */}
-            <SectionSpacer hasBackground={true} />
-            {/* <GotQuestions /> */}
-            <SectionSpacer hasBackground={true} />
-            {/* <FindUsIn /> */}
-            <SectionSpacer hasBackground={true} />
-            {/* <TrustedByExperts /> */}
-            {/* <InstagramFeeds /> */}
-            {/* <GradientBackground variant="section-4">
+                <SectionSpacer hasBackground={true} />
+                {/* <GotQuestions /> */}
+                <SectionSpacer hasBackground={true} />
+                {/* <FindUsIn /> */}
+                <SectionSpacer hasBackground={true} />
+                {/* <TrustedByExperts /> */}
+                {/* <InstagramFeeds /> */}
+                {/* <GradientBackground variant="section-4">
                 <Suspense fallback={<Loader />}>
                     <BlogPosts />
                 </Suspense>
             </GradientBackground> */}
-            <JoinTheCommunity />
-            <SectionSpacer hasBackground={true} />
-            {/* <Footer
+                <JoinTheCommunity />
+                <SectionSpacer hasBackground={true} />
+                {/* <Footer
                 desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
                 mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
             /> */}
+            </LazyM>
         </main>
     );
 }
