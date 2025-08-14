@@ -6,9 +6,9 @@ interface SectionSpacerProps {
 }
 
 const SectionSpacer: React.FC<SectionSpacerProps> = ({
-                                                         hasBackground = false,
-                                                         customSpacing
-                                                     }) => {
+    hasBackground = false,
+    customSpacing,
+}) => {
     const getSpacingClass = (): string => {
         if (customSpacing) return customSpacing;
 
@@ -17,14 +17,7 @@ const SectionSpacer: React.FC<SectionSpacerProps> = ({
             : 'h-0 md:h-auto max-md:h-[90px]'; // 90px only on mobile
     };
 
-    return (
-        <div
-            className={`
-        w-full
-        ${getSpacingClass()}
-      `}
-        />
-    );
+    return <div className={`w-full ${getSpacingClass()} `} />;
 };
 
 export default SectionSpacer;

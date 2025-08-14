@@ -73,7 +73,7 @@ export default async function RootLayout({
 
                     {children}
                     {/* <CookieConsent /> */}
-                    <Toaster position="top-right" />
+                    {/* <Toaster position="top-right" /> */}
                 </Providers>
             </body>
         </html>

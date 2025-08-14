@@ -98,7 +98,7 @@ export default async function Home() {
                     <BackedByScience />
                 </Suspense>
             </GradientBackground> */}
-            <Founder />
+            {/* <Founder /> */}
             {/* <CompetitionModal
                 headingText="Buy 2 Nutriburst Minion Products for a chance to"
                 actionText="WIN"
@@ -121,9 +121,9 @@ export default async function Home() {
                 <LovedBy />
             </GradientBackground> */}
             <SectionSpacer hasBackground={true} />
-            <GotQuestions />
+            {/* <GotQuestions /> */}
             <SectionSpacer hasBackground={true} />
-            <FindUsIn />
+            {/* <FindUsIn /> */}
             <SectionSpacer hasBackground={true} />
             {/* <TrustedByExperts /> */}
             {/* <InstagramFeeds /> */}
