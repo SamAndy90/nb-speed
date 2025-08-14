@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { DOMMotionComponents, motion, MotionProps } from 'framer-motion';
+import { DOMMotionComponents, MotionProps } from 'framer-motion';
 import { ElementType, ReactNode, HTMLAttributes, ComponentProps } from 'react';
 
 import { LazyMotion, domAnimation, m } from 'framer-motion';
@@ -25,7 +25,7 @@ export function Motion<T extends MotionTag = 'div'>({
     className,
     ...props
 }: MotionComponentProps<T>) {
-    const Component = (motion[as || 'div'] as ElementType) || motion.div;
+    const Component = (m[as || 'div'] as ElementType) || m.div;
 
     return (
         <MotionWrapper>

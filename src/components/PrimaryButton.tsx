@@ -1,6 +1,6 @@
 import Link, { LinkProps } from 'next/link';
 import ChevronRight from '@/assets/icons/chevron-right.svg';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { ComponentProps } from 'react';
 import { AsProps } from '@/types';
