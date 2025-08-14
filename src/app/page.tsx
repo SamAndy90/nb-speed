@@ -114,7 +114,7 @@ export default async function Home() {
             <Suspense fallback={null}>
                 <ReferrerToast />
             </Suspense>
-            <GummiesRedefined />
+            {/* <GummiesRedefined /> */}
             {/* <DiscoverOurCollections /> */}
             <SectionSpacer hasBackground={true} />
             {/* <GradientBackground variant="section-3">
@@ -127,17 +127,17 @@ export default async function Home() {
             <SectionSpacer hasBackground={true} />
             {/* <TrustedByExperts /> */}
             {/* <InstagramFeeds /> */}
-            <GradientBackground variant="section-4">
+            {/* <GradientBackground variant="section-4">
                 <Suspense fallback={<Loader />}>
                     <BlogPosts />
                 </Suspense>
-            </GradientBackground>
+            </GradientBackground> */}
             <JoinTheCommunity />
             <SectionSpacer hasBackground={true} />
-            <Footer
+            {/* <Footer
                 desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
                 mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
-            />
+            /> */}
         </main>
     );
 }
