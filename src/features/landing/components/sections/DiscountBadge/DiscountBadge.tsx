@@ -4,7 +4,7 @@ import ChevronRight from '@/assets/icons/chevron-right.svg';
 import { cn } from '@/lib/utils';
 import Check from '@/assets/icons/check.svg';
 import Close from '@/assets/icons/close.svg';
-import { AnimatePresence, m, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { MotionButton } from '@/features/motion/components';
 import React from 'react';
 import { LeftSection } from '@/features/blog/join-the-community/join-the-community';
@@ -85,7 +85,7 @@ export function DiscountBadge({
         <Dialog>
             <AnimatePresence>
                 {badgeShown && (
-                    <m.div
+                    <motion.div
                         className="fixed bottom-[7px] right-[7px] z-50 md:bottom-9 md:right-9"
                         variants={ContainerVariants}
                         initial="hide"
@@ -95,7 +95,7 @@ export function DiscountBadge({
                         <DialogTrigger asChild>
                             <Button className="flex size-[98px] flex-col rounded-full bg-primary text-[9px] font-bold drop-shadow-card hover:bg-theme-50 md:size-32 md:text-xs">
                                 Claim your
-                                <div className="bg-gradient-to-r from-[#B9846F] via-[#D4B091] to-[#B08271] bg-clip-text text-[30px] leading-[1.05] text-transparent md:text-[40px] md:leading-[1.05]">
+                                <div className="text-[30px] text-transparent bg-clip-text bg-gradient-to-r from-[#B9846F] via-[#D4B091] to-[#B08271] leading-[1.05]  md:text-[40px] md:leading-[1.05]">
                                     10%
                                 </div>
                                 off your order
@@ -109,7 +109,7 @@ export function DiscountBadge({
                             variants={CloseButtonVariants}>
                             <Close className="size-full" />
                         </MotionButton>
-                    </m.div>
+                    </motion.div>
                 )}
             </AnimatePresence>
 
@@ -126,7 +126,7 @@ export function DiscountBadge({
                         Sign up for emails and save 10% OFF on your first gummy
                         vitamins
                     </p>
-                    <NewsletterInputWithButton />
+                    <NewsletterInputWithButton/>
                     {/*<PrimaryInput status={null} />*/}
                 </div>
             </DialogContent>

@@ -1,5 +1,4 @@
 'use client';
-
 import { HeroOption } from '@/features/landing/types';
 import { ProductSection } from '@/features/product/components/ProductSection';
 import { cn } from '@/lib/utils';
@@ -32,7 +31,7 @@ import HeroSalesBadge from '@/assets/hero-bundles/sales-badge.svg';
 import { DiscountBadge } from '../DiscountBadge';
 import {
     AnimatePresence,
-    m,
+    motion,
     useMotionValueEvent,
     useScroll,
 } from 'framer-motion';
@@ -81,7 +80,7 @@ const HeroHeading = forwardRef<HTMLHeadingElement, ComponentProps<'h1'>>(
 );
 
 HeroHeading.displayName = 'HeroHeading';
-const MotionHeroHeading = m.create(HeroHeading);
+const MotionHeroHeading = motion.create(HeroHeading);
 
 function HeroIconImage({ className, ...props }: ImageProps) {
     return (
@@ -99,7 +98,7 @@ function HeroIconCard({
     className,
 }: PropsWithClassName & PropsWithChildren) {
     return (
-        <m.li
+        <motion.li
             variants={{
                 start: { scale: 1.3, opacity: 0 },
                 end: { scale: 1, opacity: 1 },
@@ -110,10 +109,10 @@ function HeroIconCard({
                 className
             )}>
             {children}
-        </m.li>
+        </motion.li>
     );
 }
-const MotionProductSection = m.create(ProductSection);
+const MotionProductSection = motion.create(ProductSection);
 
 function useElementBoundingRect(ref: React.RefObject<HTMLElement>) {
     const [rect, setRect] = useState<DOMRect | null>(null);
@@ -165,6 +164,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
         return () => clearInterval(interval);
     }, []);
 
+    const containerRef = useRef<HTMLDivElement>(null);
     return (
         <Container>
             <MotionProductSection
@@ -222,14 +222,13 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                 </MotionHeroHeading>
                             </AnimatePresence>
                         </MotionDiv>
-
                         <MotionParagraph
                             text={
                                 'No more slipping up: a wellness routine that sticks with you'
                             }
                             className="mb-6 text-center text-paragraph-3 md:mb-5 md:text-[18.25px] md:font-normal lg:whitespace-nowrap lg:text-start"
                         />
-                        <m.ul
+                        <motion.ul
                             className="hidden md:mb-5 md:flex md:gap-3"
                             variants={{
                                 start: {},
@@ -246,6 +245,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                     src={InformedSport}
                                     alt=""
                                     className="object-top"
+                                    priority
                                 />
                                 <HeroIconLabel>Informed Sport</HeroIconLabel>
                             </HeroIconCard>
@@ -273,8 +273,8 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                 </div>
                                 <HeroIconLabel>Kosher Permitted</HeroIconLabel>
                             </HeroIconCard>
-                        </m.ul>
-                        <m.ul
+                        </motion.ul>
+                        <motion.ul
                             className="mb-7 flex md:hidden"
                             variants={{
                                 start: {},
@@ -304,6 +304,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                     src={InformedSport}
                                     alt=""
                                     className="object-top"
+                                    priority
                                 />
                                 <HeroIconLabel>Informed Sport</HeroIconLabel>
                             </HeroIconCard>
@@ -320,7 +321,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                 </div>
                                 <HeroIconLabel>Kosher Permitted</HeroIconLabel>
                             </HeroIconCard>
-                        </m.ul>
+                        </motion.ul>
                         <MotionDiv
                             initial={{ x: '-100%', opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
@@ -342,7 +343,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                     <div className="grow-[0.5] md:hidden" />
                     <div className="relative -mt-1.5 aspect-[388/350] w-full max-w-[388px] lg:min-w-[700px] lg:max-w-full">
                         <AnimatePresence mode="popLayout">
-                            <m.div
+                            <motion.div
                                 className="relative h-full w-full"
                                 variants={FadeInVariants}
                                 initial="hide"
@@ -360,7 +361,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                                     sizes={'(min-width: 1024px) 700px, 90vw'}
                                     className="h-auto w-full scale-[1.1] object-contain md:scale-[1.3] lg:scale-100"
                                 />
-                            </m.div>
+                            </motion.div>
                         </AnimatePresence>
                         {/* <HeroExpertBadge
                             expertName={expertName}
@@ -377,7 +378,6 @@ export function Hero({ options }: { options: HeroOption[] }) {
                         </MotionDiv>
                     </div>
                 </div>
-
                 <p className="text-paragraph-4 font-bold">As seen in</p>
                 <div className="flex w-full overflow-clip">
                     <HeroMarquee>
@@ -407,7 +407,7 @@ export function Hero({ options }: { options: HeroOption[] }) {
                         />
                         <HeroBrandImage
                             src={theTimes}
-                            alt="Badge"
+                            alt=""
                             i={3}
                             sizes={'(min-width: 1024px) 25vw, 33vw'}
                             count={4}

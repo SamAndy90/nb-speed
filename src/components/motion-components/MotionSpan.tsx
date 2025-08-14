@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { m, HTMLMotionProps } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
 type MotionSpanProps = {
     text: string;
@@ -9,7 +9,7 @@ type MotionSpanProps = {
     HTMLMotionProps<'span'>;
 export function MotionSpan({ text, className, ...props }: MotionSpanProps) {
     return (
-        <m.span
+        <motion.span
             initial={'hidden'}
             whileInView={'visible'}
             transition={{
@@ -19,7 +19,7 @@ export function MotionSpan({ text, className, ...props }: MotionSpanProps) {
             className={cn(className)}
             {...props}>
             {[...text].map((char, i) => (
-                <m.span
+                <motion.span
                     key={char + i}
                     variants={{
                         hidden: {
@@ -34,8 +34,8 @@ export function MotionSpan({ text, className, ...props }: MotionSpanProps) {
                         ease: [0.4, 0.0, 0.2, 1],
                     }}>
                     {char}
-                </m.span>
+                </motion.span>
             ))}
-        </m.span>
+        </motion.span>
     );
 }

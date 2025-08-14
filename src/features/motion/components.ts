@@ -1,4 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-export const MotionButton = m.create(Button);
+export const MotionButton = motion.create(Button);

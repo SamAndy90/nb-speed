@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 type MotionTitleProps = {
     text: string;
@@ -17,7 +17,7 @@ export function MotionTitle({
     return (
         <Component {...props} className={cn(className)}>
             {[...text].map((char, i) => (
-                <m.span
+                <motion.span
                     key={char + i}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -28,7 +28,7 @@ export function MotionTitle({
                         ease: [0.4, 0.0, 0.2, 1],
                     }}>
                     {char}
-                </m.span>
+                </motion.span>
             ))}
         </Component>
     );

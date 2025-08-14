@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 import Container from '@/components/container';
 import ReviewsBadgeRibbon from './ReviewsBadgeRibbon';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { MotionParagraph } from '@/components/motion-components/MotionParagraph';
 import { TESTIMONIALS } from '@/lib/data/testimonials';
 
@@ -36,7 +36,7 @@ function VideoReviewCard({
     className = '',
 }: VideoReviewCardProps) {
     return (
-        <m.div
+        <motion.div
             variants={{
                 hidden: {
                     opacity: 0,
@@ -73,7 +73,7 @@ function VideoReviewCard({
                 <p className="grow text-paragraph-4">{children}</p>
                 <p className="text-paragraph-3 font-bold">{name}</p>
             </div>
-        </m.div>
+        </motion.div>
     );
 }
 
@@ -125,7 +125,7 @@ function VideoReviewCarouselCard({
 
 function ReviewsList() {
     return (
-        <m.div
+        <motion.div
             variants={{
                 hidden: {},
                 visible: {
@@ -148,7 +148,7 @@ function ReviewsList() {
                     {review.content}
                 </VideoReviewCard>
             ))}
-        </m.div>
+        </motion.div>
     );
 }
 
@@ -211,7 +211,7 @@ export function LovedBy() {
                     <h2 className="flex flex-col">
                         <MotionSpan text={'Real Stories. Real Results'} />
                         {/* <br /> */}
-                        <m.b
+                        <motion.b
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
@@ -222,7 +222,7 @@ export function LovedBy() {
                             viewport={{ once: true }}
                             className="self-start bg-cooper-text-gradient bg-clip-text text-transparent">
                             See why customers choose Nutriburst
-                        </m.b>
+                        </motion.b>
                     </h2>
                     <MotionParagraph
                         text={

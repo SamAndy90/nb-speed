@@ -17,6 +17,13 @@ import dynamic from 'next/dynamic';
 import reviewsService from '@/lib/reviews/reviews-service';
 import { VariantProductProvider } from '@/features/product/VariantProductProvider';
 
+const Qualifications = dynamic(
+    () => import('@/features/about-us/qualifications/qualifications'),
+    {
+        ssr: false,
+    }
+);
+
 export default async function ProductPage(props: {
     params: Promise<{ handle: string }>;
 }) {
@@ -62,6 +69,10 @@ export default async function ProductPage(props: {
                 {product.details.whySettle && (
                     <WhyWaste data={product.details.whySettle} />
                 )}
+
+                <GradientBackground variant="section-3">
+                    <Qualifications highlight="text-transparent bg-cooper-text-gradient bg-clip-text" />
+                </GradientBackground>
 
                 {product.details.faq && product.details.faq.length > 0 && (
                     <GotQuestions

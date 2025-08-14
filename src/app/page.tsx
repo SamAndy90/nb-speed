@@ -10,7 +10,7 @@ import { HeroOption } from '@/features/landing/types';
 import bundleBlue from '@/assets/hero-bundles/hero-bundle-blue.webp';
 import bundleGreen from '@/assets/hero-bundles/hero-bundle-green.webp';
 import bundlePink from '@/assets/hero-bundles/hero-bundle-pink.webp';
-import { CBackedByScience } from '@/features/landing/components/sections/BackedByScience/CBackedByScience';
+import { BackedByScience as UIBackedByScience } from '@/features/landing/components/sections/BackedByScience';
 import { getCollections } from '@/features/shopify/api/collection';
 import { getFragmentData } from '@/gql/storefront';
 import { collectionFragment } from '@/features/shopify/graphql/storefront/fragments/collection';
@@ -36,7 +36,6 @@ import SectionSpacer from '@/components/SectionSpacer';
 import InstagramFeeds from '@/components/InstagramFeeds';
 import { Loader } from '@/components/Loader';
 import dynamic from 'next/dynamic';
-import LazyM from '@/components/motion-components/LazyM';
 
 const CompetitionModal = dynamic(
     () =>
@@ -45,6 +44,13 @@ const CompetitionModal = dynamic(
         ssr: false,
     }
 );
+
+/*
+pink: 'hsl(var(--accent-pink))',
+                    'ocean-blue': 'hsl(var(--accent-ocean-blue))',
+                    'tech-blue': 'hsl(var(--accent-tech-blue))',
+                    orange: 'hsl(var(--accent-orange))',
+                    green: 'hsl(var(--accent-green))'*/
 
 const heroOptions: HeroOption[] = [
     {
@@ -93,54 +99,52 @@ const heroOptions: HeroOption[] = [
 export default async function Home() {
     return (
         <main className="flex min-h-screen w-full flex-col items-center justify-between overflow-x-hidden">
-            <LazyM>
-                <GradientBackground variant="section-2">
-                    <Hero options={heroOptions} />
-                    <Suspense fallback={<Loader />}>
-                        <BackedByScience />
-                    </Suspense>
-                </GradientBackground>
-                <Founder />
-                <CompetitionModal
-                    headingText="Buy 2 Nutriburst Minion Products for a chance to"
-                    actionText="WIN"
-                    prizeDescription="A family holiday for 4 to Minion World in Orlando, Florida"
-                    ctaText="Shop Minion"
-                    competitionUrl="/collections/all-products?query=Minion"
-                    learnMoreUrl="/pages/minions-win"
-                    imageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Group_13c590ff-4f30-4f88-b959-2363a82e8093.png?v=1751632470"
-                    imageAlt="Minions Competition"
-                    mobileImageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Minions_Mega_Multi_PDP_01.png?v=1751879554"
-                    sessionStorageKey="minions-competition-modal-shown"
-                />
-                <Suspense fallback={null}>
-                    <ReferrerToast />
+            <GradientBackground variant="section-2">
+                <Hero options={heroOptions} />
+                <Suspense fallback={<Loader />}>
+                    <BackedByScience />
                 </Suspense>
-                <GummiesRedefined />
-                <DiscoverOurCollections />
-                <SectionSpacer hasBackground={true} />
-                <GradientBackground variant="section-3">
-                    <LovedBy />
-                </GradientBackground>
-                <SectionSpacer hasBackground={true} />
-                <GotQuestions />
-                <SectionSpacer hasBackground={true} />
-                <FindUsIn />
-                <SectionSpacer hasBackground={true} />
-                <TrustedByExperts />
-                <InstagramFeeds />
-                <GradientBackground variant="section-4">
-                    <Suspense fallback={<Loader />}>
-                        <BlogPosts />
-                    </Suspense>
-                </GradientBackground>
-                <JoinTheCommunity />
-                <SectionSpacer hasBackground={true} />
-                <Footer
-                    desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
-                    mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
-                />
-            </LazyM>
+            </GradientBackground>
+            <Founder />
+            <CompetitionModal
+                headingText="Buy 2 Nutriburst Minion Products for a chance to"
+                actionText="WIN"
+                prizeDescription="A family holiday for 4 to Minion World in Orlando, Florida"
+                ctaText="Shop Minion"
+                competitionUrl="/collections/all-products?query=Minion"
+                learnMoreUrl="/pages/minions-win"
+                imageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Group_13c590ff-4f30-4f88-b959-2363a82e8093.png?v=1751632470"
+                imageAlt="Minions Competition"
+                mobileImageSrc="https://cdn.shopify.com/s/files/1/0072/6325/6685/files/Minions_Mega_Multi_PDP_01.png?v=1751879554"
+                sessionStorageKey="minions-competition-modal-shown"
+            />
+            <Suspense fallback={null}>
+                <ReferrerToast />
+            </Suspense>
+            <GummiesRedefined />
+            <DiscoverOurCollections />
+            <SectionSpacer hasBackground={true} />
+            <GradientBackground variant="section-3">
+                <LovedBy />
+            </GradientBackground>
+            <SectionSpacer hasBackground={true} />
+            <GotQuestions />
+            <SectionSpacer hasBackground={true} />
+            <FindUsIn />
+            <SectionSpacer hasBackground={true} />
+            <TrustedByExperts />
+            <InstagramFeeds />
+            <GradientBackground variant="section-4">
+                <Suspense fallback={<Loader />}>
+                    <BlogPosts />
+                </Suspense>
+            </GradientBackground>
+            <JoinTheCommunity />
+            <SectionSpacer hasBackground={true} />
+            <Footer
+                desktopMenu={DESKTOP_FOOTER_MENU_ITEMS}
+                mobileMenu={MOBILE_FOOTER_MENU_ITEMS}
+            />
         </main>
     );
 }
@@ -173,7 +177,7 @@ async function BackedByScience() {
             };
         })
     );
-    return <CBackedByScience collections={collectionMap} reviews={reviews} />;
+    return <UIBackedByScience collections={collectionMap} reviews={reviews} />;
 }
 
 async function BlogPosts() {

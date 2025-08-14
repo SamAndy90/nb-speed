@@ -20,7 +20,7 @@ import {
 } from '@/features/shopify/consts';
 import { useAddProduct } from '@/features/cart/hooks/useAddProduct';
 import { MouseEvent, useMemo } from 'react';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const DEFAULT_SHORT_DESCRIPTION =
     'Tropical-flavored gummies for energy, deep relaxation, and stress resistance.';
@@ -91,7 +91,7 @@ export function RecommendationCardItem({
         <Link
             href={`/products/${product.handle}`}
             className="block h-[490px] cursor-pointer rounded-md drop-shadow-card duration-500 hover:scale-[1.02] hover:shadow-soft-1">
-            <m.div
+            <motion.div
                 initial={{ opacity: 0, x: 25 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: Idx / 3, duration: 0.6 }}
@@ -159,7 +159,7 @@ export function RecommendationCardItem({
                         </Button>
                     </div>
                 </div>
-            </m.div>
+            </motion.div>
         </Link>
     );
 }

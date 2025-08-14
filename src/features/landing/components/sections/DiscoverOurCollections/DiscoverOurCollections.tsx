@@ -12,7 +12,7 @@ import hydrationMobile from '@/assets/hydration-bg-mobile.jpg';
 import Image from 'next/image';
 import Container from '@/components/container';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { MotionSpan } from '@/components/motion-components/MotionSpan';
 import { ShopUrls } from '@/route-urls';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
@@ -174,14 +174,14 @@ export function DiscoverOurCollections() {
                 </div>
             </Container>
 
-            <m.div
+            <motion.div
                 variants={containerVariants}
                 initial={'hidden'}
                 whileInView={'visible'}
                 viewport={{ once: true }}
                 ref={scrollContainerRef}
                 className="mt-10 flex gap-5 overflow-auto px-5 [-ms-overflow-style:'none'] [scrollbar-width:none] lg:mt-[60px] lg:gap-8 [&::-webkit-scrollbar]:hidden">
-                <m.div
+                <motion.div
                     variants={cardVariants}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="aspect-[0.9] !min-w-[302px] lg:!min-w-[500px]"
@@ -199,8 +199,8 @@ export function DiscoverOurCollections() {
                             sizes={'(max-width: 1024px) 320px, 500px'}
                         />
                     </DiscoverCarouselItem>
-                </m.div>
-                <m.div
+                </motion.div>
+                <motion.div
                     variants={cardVariants}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="!min-w-[302px] lg:!min-w-[500px]">
@@ -215,8 +215,8 @@ export function DiscoverOurCollections() {
                             sizes={'(max-width: 1024px) 320px, 500px'}
                         />
                     </DiscoverCarouselItem>
-                </m.div>
-                <m.div
+                </motion.div>
+                <motion.div
                     variants={cardVariants}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="!min-w-[302px] lg:!min-w-[500px]">
@@ -233,8 +233,8 @@ export function DiscoverOurCollections() {
                             />
                         </div>
                     </DiscoverCarouselItem>
-                </m.div>
-                <m.div
+                </motion.div>
+                <motion.div
                     variants={cardVariants}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="!min-w-[302px] lg:!min-w-[500px]"
@@ -252,8 +252,8 @@ export function DiscoverOurCollections() {
                             className="size-full object-cover object-[center_65%] lg:object-center"
                         />
                     </DiscoverCarouselItem>
-                </m.div>
-            </m.div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
